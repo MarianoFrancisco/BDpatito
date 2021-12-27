@@ -9,6 +9,7 @@ CREATE TABLE turno(
 	);
 CREATE TABLE usuario(
 	usuario VARCHAR(25) NOT NULL,
+    correo VARCHAR(25) NOT NULL,
     passwordUsuario VARCHAR(70) NOT NULL,
     tipoUsuario INT NOT NULL,
     idTurno INT NOT NULL,
@@ -118,7 +119,7 @@ CREATE TABLE corteMes(
 	);
     INSERT INTO turno(idTurno, area, horarioIngreso, dias) VALUES
 (1, 'prueba','07:00', 'L,M,X,J,V,S,D');
-    INSERT INTO usuario(usuario, passwordUsuario, tipoUsuario, idTurno) VALUES
-('Juana', '$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW', 2 ,1),
-('Marco', '$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',1 ,1),
-('Ale', '$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',3 ,1);
+    INSERT INTO usuario(usuario,correo, passwordUsuario, tipoUsuario, idTurno) VALUES
+('Juana', 'juana@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW', 2 ,1),
+('Marco', 'marco@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',1 ,1),
+('Ale', 'ale@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',3 ,1);
