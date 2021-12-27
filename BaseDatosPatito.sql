@@ -37,13 +37,24 @@ CREATE TABLE examen(
     CONSTRAINT FK_TO_SUBEXAMEN FOREIGN KEY(tipo) REFERENCES subExamen(tipo),
     CONSTRAINT FK_TO_MUESTRA FOREIGN KEY(codigoMuestra) REFERENCES muestra(codigoMuestra)
 	);
+
+CREATE TABLE regalias(
+	numeroColegiado CHAR(16) NOT NULL,
+    medico VARCHAR(25) NOT NULL,
+    clinica VARCHAR(25) NOT NULL,
+    numeroCuenta INT,
+    direccion VARCHAR(25) NOT NULL,
+    CONSTRAINT PK_REGALIAS PRIMARY KEY(numeroColegiado)
+	);
 CREATE TABLE paciente(
 	cui CHAR(14) NOT NULL,
     sexo CHAR(1) NOT NULL,
     nombrePaciente VARCHAR(30) NOT NULL,
-    edadPaciente INT,
-    numeroPaciente INT,
-    CONSTRAINT PK_PACIENTE PRIMARY KEY(cui)
+    edadPaciente INT NOT NULL,
+    numeroPaciente INT NOT NULL,
+    numeroColegiado CHAR(16),
+    CONSTRAINT PK_PACIENTE PRIMARY KEY(cui),
+    CONSTRAINT FK_TO_REGALIAS FOREIGN KEY(numeroColegiado) REFERENCES regalias(numeroColegiado)
 	);
 CREATE TABLE examenRealizar(
 	idExamen INT NOT NULL AUTO_INCREMENT,
@@ -59,14 +70,6 @@ CREATE TABLE examenRealizar(
     CONSTRAINT FK_TO_SUBEXAMEN2 FOREIGN KEY(tipo) REFERENCES subExamen(tipo),
     CONSTRAINT FK_TO_MUESTRA2 FOREIGN KEY(codigoMuestra) REFERENCES muestra(codigoMuestra)
 	);
-CREATE TABLE regalias(
-	numeroColegiado INT NOT NULL,
-    medico VARCHAR(25) NOT NULL,
-    clinica VARCHAR(25) NOT NULL,
-    numeroCuenta INT,
-    direccion VARCHAR(25) NOT NULL,
-    CONSTRAINT PK_REGALIAS PRIMARY KEY(numeroColegiado)
-	);
 CREATE TABLE reporte(
 	codigoReporte INT NOT NULL,
     fechaHora DATETIME NOT NULL,
@@ -75,14 +78,14 @@ CREATE TABLE reporte(
     codigoExamen INT NOT NULL,
     tipo VARCHAR(25) NOT NULL,
     codigoMuestra INT NOT NULL,
-    numeroColegiado INT,
+    numeroColegiado CHAR(16),
     CONSTRAINT PK_REPORTE PRIMARY KEY(codigoReporte),
     CONSTRAINT FK_TO_EXAMENREALIZAR FOREIGN KEY(idExamen) REFERENCES examenRealizar(idExamen),
     CONSTRAINT FK_TO_PACIENTE2 FOREIGN KEY(cui) REFERENCES paciente(cui),
 	CONSTRAINT FK_TO_EXAMEN2 FOREIGN KEY(codigoExamen) REFERENCES examen(codigoExamen),
     CONSTRAINT FK_TO_SUBEXAMEN3 FOREIGN KEY(tipo) REFERENCES subExamen(tipo),
     CONSTRAINT FK_TO_MUESTRA3 FOREIGN KEY(codigoMuestra) REFERENCES muestra(codigoMuestra),
-    CONSTRAINT FK_TO_REGALIAS FOREIGN KEY(numeroColegiado) REFERENCES regalias(numeroColegiado)
+    CONSTRAINT FK_TO_REGALIAS2 FOREIGN KEY(numeroColegiado) REFERENCES regalias(numeroColegiado)
 	);
 
 CREATE TABLE inventario(
@@ -93,12 +96,12 @@ CREATE TABLE inventario(
     codigoReporte INT NOT NULL,
     cui CHAR(14) NOT NULL,
     idExamen INT NOT NULL,
-    numeroColegiado INT,
+    numeroColegiado CHAR(16),
     CONSTRAINT PK_INVENTARIO PRIMARY KEY(idInventario),
     CONSTRAINT FK_TO_REPORTE FOREIGN KEY(codigoReporte) REFERENCES reporte(codigoReporte),
     CONSTRAINT FK_TO_PACIENTE3 FOREIGN KEY(cui) REFERENCES paciente(cui),
     CONSTRAINT FK_TO_EXAMEN3 FOREIGN KEY(idExamen) REFERENCES examenRealizar(idExamen),
-    CONSTRAINT FK_TO_REGALIAS2 FOREIGN KEY(numeroColegiado) REFERENCES regalias(numeroColegiado)
+    CONSTRAINT FK_TO_REGALIAS3 FOREIGN KEY(numeroColegiado) REFERENCES regalias(numeroColegiado)
 	);
 CREATE TABLE corteMes(
 	fecha INT NOT NULL,
@@ -109,13 +112,13 @@ CREATE TABLE corteMes(
     codigoReporte INT NOT NULL,
     cui CHAR(14) NOT NULL,
     idExamen INT NOT NULL,
-    numeroColegiado INT,
+    numeroColegiado CHAR(16),
     CONSTRAINT PK_CORTEMES PRIMARY KEY(fecha),
     CONSTRAINT FK_TO_INVENTARIO FOREIGN KEY(idInventario) REFERENCES inventario(idInventario),
     CONSTRAINT FK_TO_REPORTE1 FOREIGN KEY(codigoReporte) REFERENCES reporte(codigoReporte),
     CONSTRAINT FK_TO_PACIENTE4 FOREIGN KEY(cui) REFERENCES paciente(cui),
     CONSTRAINT FK_TO_EXAMEN4 FOREIGN KEY(idExamen) REFERENCES examenRealizar(idExamen),
-    CONSTRAINT FK_TO_REGALIAS3 FOREIGN KEY(numeroColegiado) REFERENCES regalias(numeroColegiado)
+    CONSTRAINT FK_TO_REGALIAS4 FOREIGN KEY(numeroColegiado) REFERENCES regalias(numeroColegiado)
 	);
     INSERT INTO turno(idTurno, area, horarioIngreso, dias) VALUES
 (1, 'prueba','07:00', 'L,M,X,J,V,S,D');
