@@ -63,7 +63,6 @@ CREATE TABLE reporte(
     fechaHora DATETIME NOT NULL,
     idExamen INT NOT NULL,
     cui CHAR(14) NOT NULL,
-    codigoExamen INT NOT NULL,
     tipo VARCHAR(25) NOT NULL,
     numeroColegiado CHAR(16),
     CONSTRAINT PK_REPORTE PRIMARY KEY(codigoReporte),
