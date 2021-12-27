@@ -1,5 +1,5 @@
-CREATE DATABASE patitoBD;
-USE patitoBD;
+CREATE DATABASE patitobd;
+USE patitobd;
 CREATE TABLE turno(
 	idTurno INT NOT NULL AUTO_INCREMENT,
     area VARCHAR(15) NOT NULL,
