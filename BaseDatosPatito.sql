@@ -112,11 +112,16 @@ CREATE TABLE corteMes(
     CONSTRAINT FK_TO_REGALIAS4 FOREIGN KEY(numeroColegiado) REFERENCES regalias(numeroColegiado)
 	);
     INSERT INTO turno(idTurno, area, horarioIngreso, dias) VALUES
-(1, 'prueba','07:00', 'L,M,X,J,V,S,D');
+(1, 'Administrador','06:00', 'L,M,X,J,V,S,D'),
+(2, 'Secretaria','07:00', 'L,M,X,J,V,S,D'),
+(3, 'Laboratorista','07:00', 'L,M,X,J,V,S,D');
     INSERT INTO usuario(usuario,correo, passwordUsuario, tipoUsuario, idTurno, estado) VALUES
-('Juana', 'juana@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW', 2 ,1, true),
+('Juana', 'juana@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW', 2 ,2, true),
 ('Marco', 'marco@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',1 ,1, true),
-('Ale', 'ale@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',3 ,1,true);
+('Ale', 'ale@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',3 ,3,true),
+('Mishel', 'mishel@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',3 ,3,true),
+('Victoria', 'vic@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',3 ,3,true),
+('Juan', 'juan@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',3 ,3,true);
 INSERT INTO examen(codigoExamen, nombreExamen, precioExamen, nombreMuestra) VALUES
 (100, 'Hematologia',1200, 'Sangre'),
 (101, 'Orina',800, 'Orina'),
@@ -143,4 +148,16 @@ INSERT INTO subExamen(tipo, nombreSub,codigoExamen) VALUES
 ('Microscopico', 'Eritrocitos',102),
 ('Microscopico', 'Grasas',102),
 ('Microscopico', 'Jabones',102)
+;
+INSERT INTO regalias(numeroColegiado,medico,clinica,numeroCuenta,direccion) VALUES
+(522,'Mishel','Patito2',204123,'Guatemala')
+;
+INSERT INTO paciente(cui,sexo,nombrePaciente,edadPaciente,numeroPaciente,numeroColegiado,estado) VALUES
+(1234567891234,'F','Ana',20,1234567,522,true)
+;
+INSERT INTO examenRealizar(fechaExamen, cui,nombreSubExamen,tipo,codigoExamen) VALUES
+(CURDATE(),1234567891234,'Globulos Rojos','Completo',100)
+;
+INSERT INTO reporte(codigoReporte, fechaHora, idExamen, cui,nombreSubExamen,tipo,numeroColegiado,codigoExamen) VALUES
+(1, NOW(),1, 1234567891234,'Globulos Rojos','Completo',522,100)
 ;
