@@ -144,5 +144,3 @@ INSERT INTO subExamen(tipo, nombreSub,codigoExamen) VALUES
 ('Microscopico', 'Grasas',102),
 ('Microscopico', 'Jabones',102)
 ;
- INSERT INTO paciente(idTurno, area, horarioIngreso, dias) VALUES
-(1, 'prueba','07:00', 'L,M,X,J,V,S,D');
