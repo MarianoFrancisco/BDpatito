@@ -13,6 +13,7 @@ CREATE TABLE usuario(
     passwordUsuario VARCHAR(70) NOT NULL,
     tipoUsuario INT NOT NULL,
     idTurno INT NOT NULL,
+    estado BOOLEAN NOT NULL,
     CONSTRAINT PK_USUARIO PRIMARY KEY(usuario),
     CONSTRAINT FK_TO_TURNO FOREIGN KEY(idTurno) REFERENCES turno(idTurno)
 	);
@@ -107,9 +108,9 @@ CREATE TABLE corteMes(
     INSERT INTO turno(idTurno, area, horarioIngreso, dias) VALUES
 (1, 'prueba','07:00', 'L,M,X,J,V,S,D');
     INSERT INTO usuario(usuario,correo, passwordUsuario, tipoUsuario, idTurno) VALUES
-('Juana', 'juana@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW', 2 ,1),
-('Marco', 'marco@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',1 ,1),
-('Ale', 'ale@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',3 ,1);
+('Juana', 'juana@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW', 2 ,1, true),
+('Marco', 'marco@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',1 ,1, true),
+('Ale', 'ale@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',3 ,1,true);
 INSERT INTO examen(codigoExamen, nombreExamen, precioExamen, nombreMuestra) VALUES
 (100, 'Hematologia',1200, 'Sangre'),
 (101, 'Orina',800, 'Orina'),
