@@ -52,25 +52,30 @@ CREATE TABLE paciente(
 CREATE TABLE examenRealizar(
 	idExamen INT NOT NULL AUTO_INCREMENT,
     fechaExamen DATE NOT NULL,
-    resultados VARCHAR(45) NOT NULL,
     cui CHAR(14) NOT NULL,
+    nombreSubExamen VARCHAR(25) NOT NULL,
     tipo VARCHAR(25) NOT NULL,
+    codigoExamen INT NOT NULL,
     CONSTRAINT PK_EXAMENREALIZAR PRIMARY KEY(idExamen),
     CONSTRAINT FK_TO_PACIENTE FOREIGN KEY(cui) REFERENCES paciente(cui),
-    CONSTRAINT FK_TO_SUBEXAMEN FOREIGN KEY(tipo) REFERENCES subExamen(tipo)
+    CONSTRAINT FK_TO_SUBEXAMEN FOREIGN KEY(tipo) REFERENCES subExamen(tipo),
+    CONSTRAINT FK_TO_EXAMEN6 FOREIGN KEY(codigoExamen) REFERENCES examen(codigoExamen)
 	);
 CREATE TABLE reporte(
 	codigoReporte INT NOT NULL,
     fechaHora DATETIME NOT NULL,
     idExamen INT NOT NULL,
     cui CHAR(14) NOT NULL,
+    nombreSubExamen VARCHAR(25) NOT NULL,
     tipo VARCHAR(25) NOT NULL,
     numeroColegiado CHAR(16),
+    codigoExamen INT NOT NULL,
     CONSTRAINT PK_REPORTE PRIMARY KEY(codigoReporte),
     CONSTRAINT FK_TO_EXAMENREALIZAR FOREIGN KEY(idExamen) REFERENCES examenRealizar(idExamen),
     CONSTRAINT FK_TO_PACIENTE2 FOREIGN KEY(cui) REFERENCES paciente(cui),
     CONSTRAINT FK_TO_SUBEXAMEN2 FOREIGN KEY(tipo) REFERENCES subExamen(tipo),
-    CONSTRAINT FK_TO_REGALIAS2 FOREIGN KEY(numeroColegiado) REFERENCES regalias(numeroColegiado)
+    CONSTRAINT FK_TO_REGALIAS2 FOREIGN KEY(numeroColegiado) REFERENCES regalias(numeroColegiado),
+    CONSTRAINT FK_TO_EXAMEN7 FOREIGN KEY(codigoExamen) REFERENCES examen(codigoExamen)
 	);
 
 CREATE TABLE inventario(
@@ -107,7 +112,7 @@ CREATE TABLE corteMes(
 	);
     INSERT INTO turno(idTurno, area, horarioIngreso, dias) VALUES
 (1, 'prueba','07:00', 'L,M,X,J,V,S,D');
-    INSERT INTO usuario(usuario,correo, passwordUsuario, tipoUsuario, idTurno) VALUES
+    INSERT INTO usuario(usuario,correo, passwordUsuario, tipoUsuario, idTurno, estado) VALUES
 ('Juana', 'juana@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW', 2 ,1, true),
 ('Marco', 'marco@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',1 ,1, true),
 ('Ale', 'ale@gmail.com','$2a$10$bTXb/uRl5aFF5nxHtlD04.Q6YaoanfQMrySIRD4yIpFo.o7SrsqHW',3 ,1,true);
